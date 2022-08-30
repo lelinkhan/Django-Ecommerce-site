@@ -1,0 +1,54 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container">
+ <div class="row mt-5">
+  <div class="col-sm-6">
+    <h4>Order Summary</h4>
+    <hr>
+      <div class="card mb-2">
+          {% for cart in cart_items %}
+        <div class="card-body">
+          <h5>Product: {{cart.product.title}}</h5>
+          <p>Quantity: {{cart.quantity}}</p>
+          <p class="fw-bold">Price:{{cart.total_amount}}</p>
+        </div>
+          {% endfor %}
+      </div>
+         <p class="fw-bold">Product Total Cost <small>(Include Shipping Cost)</small> =  {{total_amount}}</p>
+      <hr>
+    <small>Term and Condition: Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe! Iure optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil in et quis?</small>
+  </div>
+  <div class="col-sm-4 offset-sm-1">
+    <h4>Select Shipping Address</h4>
+    <hr>
+    <form action="/paymentdone">
+      {% for ad in add %}
+          <div class="card">
+            <div class="card-body">
+            <h5>{{ad.name}}</h5>
+            <p>{{ad.district}}, {{ad.locality}}</p>
+            </div>
+          </div>
+            <div class="form-check mt-2 mb-5">
+              <input class="form-check-input" name="custid" id="custad{{forloop.counter}}" type="radio" value="{{ad.id}}">
+              <label class="form-check-label fw-bold" for="custad{{forloop.counter}}">
+                Address:{{forloop.counter}}</label>
+            </div>
+          {% endfor %}
+        {% if add  %}
+        <div class="text-end">
+          <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
+        </div>
+            {% else %}
+                 <div class="text-end">
+                     <p class="text-danger">Please! At First Create your Address Profile!!</p>
+                  <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold" disabled>Continue</button>
+                </div>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

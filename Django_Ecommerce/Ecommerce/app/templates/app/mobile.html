@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+   <div class="list-group text-center">
+        <a style="text-decoration: none" href="{% url 'mobile' %}"><button type="button" class=" list-group-item list-group-item-action {% if request.path == '/mobile/' %} active {% endif %}" aria-current="true">
+          All Mobile
+        </button></a>
+    <a style="text-decoration: none"  href="{% url 'mobiledata' 'Apple' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/mobile/Apple/' %} active {% endif %} ">Apple</button></a>
+    <a style="text-decoration: none"  href="{%  url 'mobiledata' 'Samsung' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/mobile/Samsung/' %} active {% endif %}">Samsung</button></a>
+    <a style="text-decoration: none" href="{%  url 'mobiledata' 'Sony' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/mobile/Sony/' %} active {% endif %}">Sony</button></a>
+    <a style="text-decoration: none" href="{%  url 'mobiledata' 'Nokia' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/mobile/Nokia/' %} active {% endif %}">Nokia</button></a>
+    <a style="text-decoration: none" href="{%  url 'mobiledata' 'Infinix' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/mobile/Infinix/' %} active {% endif %}">Infinix</button></a>
+    <a style="text-decoration: none" href="{%  url 'mobiledata' 'Realme' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/mobile/Realme/' %} active {% endif %}">Realme</button></a>
+    <a style="text-decoration: none" href="{%  url 'mobiledata' 'Huawei' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/mobile/Huawei/' %} active {% endif %}">Huawei</button></a>
+    <a style="text-decoration: none" href="{%  url 'mobiledata' 'Vivo' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/mobile/Vivo/' %} active {% endif %}">Vivo</button></a>
+    <a style="text-decoration: none" href="{%  url 'mobiledata' 'Oppo' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/mobile/Oppo/' %} active {% endif %}">Oppo</button></a>
+
+    <a style="text-decoration: none" href="{%  url 'mobiledata' 'below' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/mobile/below/' %} active {% endif %}">Below 20,000 Tk</button></a>
+    <a style="text-decoration: none" href="{%  url 'mobiledata' 'above' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/mobile/above/' %} active {% endif %}">Above 20,000 Tk</button></a>
+
+    </div>
+   </div>
+  <div class="col-sm-8 offset-sm-1">
+   <div class="row">
+       {% for m in mobiles %}
+    <div class="col-sm-4 text-center mb-4 mx-4">
+       <div class="item">
+           <a href="{% url 'product-detail' m.id %}" class="btn">
+          <img src="{{m.product_image.url}}" alt="" height="300">
+             </a>
+         <div class="fw-bold">{{m.title}}</div>
+        <div class="fw-bold">Tk. {{m.discount_price}}<small class="fw-light text-decoration-line-through"> {{m.selling_price}}</small></div>
+     </div>
+    </div>
+       {% endfor %}
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

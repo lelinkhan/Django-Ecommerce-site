@@ -1,0 +1,34 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+     <div class=" d-inline-flex">
+         <h3 class="shadow p-3 mb-5 bg-body rounded alert alert-success">Welcome {{user.username}}</h3>
+    </div>
+  <div class="col-sm-2 px-5 border-end">
+   <ul class="list-unstyled">
+    <li class="d-grid"><a href="{% url 'profile' %}" class="btn {{active}}">Profile</a></li>
+    <li class="d-grid"><a href="{% url 'address' %}" class="btn">Address</a></li>
+   </ul>
+  </div>
+  <div class="col-sm-6 offset-sm-2">
+   <form action="" method="post">
+    {% csrf_token %}
+       {% for fm in form %}
+          <div class="form-group mb-3">
+             {{fm.label_tag}} {{fm}}<small class="text-danger">{{fm.errors | striptags}}</small>
+          </div>
+       {% endfor %}
+    <div class="col-12 mt-3">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+        {% for message in messages %}
+            <p class=" text-center text-success mb-5">{{message}}</p>
+        {% endfor %}
+   </form>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

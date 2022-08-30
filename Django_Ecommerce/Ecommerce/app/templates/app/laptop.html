@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+   <div class="list-group text-center">
+       <a style="text-decoration: none" href="{% url 'laptop' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/laptop/' %} active {% endif %}" aria-current="true">
+          All laptop
+        </button></a>
+    <a style="text-decoration: none"  href="{% url 'laptopdata' 'Apple' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/laptop/Apple/' %} active {% endif %}">Apple</button></a>
+    <a style="text-decoration: none"  href="{% url 'laptopdata' 'Hp' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/laptop/Hp/' %} active {% endif %}">Hp</button></a>
+    <a style="text-decoration: none" href="{% url 'laptopdata' 'Asus' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/laptop/Asus/' %} active {% endif %}">Asus</button></a>
+    <a style="text-decoration: none" href="{% url 'laptopdata' 'Acer' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/laptop/Acer/' %} active {% endif %}">Acer</button></a>
+    <a style="text-decoration: none" href="{% url 'laptopdata' 'Dell' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/laptop/Dell/' %} active {% endif %}">Dell</button></a>
+    <a style="text-decoration: none" href="{% url 'laptopdata' 'Lenovo' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/laptop/Lenovo/' %} active {% endif %}">Lenovo</button></a>
+    <a style="text-decoration: none" href="{% url 'laptopdata' 'Msi' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/laptop/Msi/' %} active {% endif %}">Msi</button></a>
+    <a style="text-decoration: none" href="{% url 'laptopdata' 'Gigabyte' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/laptop/Gigabyte/' %} active {% endif %}">Gigabyte</button></a>
+    <a style="text-decoration: none" href="{% url 'laptopdata' 'Sony' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/laptop/Sony/' %} active {% endif %}">Sony</button></a>
+
+    <a style="text-decoration: none" href="{% url 'laptopdata' 'below' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/laptop/below/' %} active {% endif %}">Below 50,000 Tk</button></a>
+    <a style="text-decoration: none" href="{% url 'laptopdata' 'above' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/laptop/above/' %} active {% endif %}">Above 50,000 Tk</button></a>
+
+    </div>
+   </div>
+  <div class="col-sm-8 offset-sm-1">
+   <div class="row">
+       {% for l in laptops %}
+    <div class="col-sm-4 text-center mb-4 mx-4">
+       <div class="item">
+           <a href="{% url 'product-detail' l.id %}" class="btn">
+          <img src="{{l.product_image.url}}" alt="" height="300">
+             </a>
+         <div class="fw-bold">{{l.title}}</div>
+        <div class="fw-bold">Tk {{l.discount_price}}<small class="fw-light text-decoration-line-through"> {{l.selling_price}}</small></div>
+     </div>
+    </div>
+        {%  endfor %}
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

@@ -1,0 +1,37 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+   <div class="list-group text-center">
+       <a style="text-decoration: none" href="{% url 'bottomwear' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/bottomwear/' %} active {% endif %}" aria-current="true">
+          All Top Wears
+        </button></a>
+
+    <a style="text-decoration: none" href="{% url 'bottomwearData' 'below' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/bottomwear/below/' %} active {% endif %}">Below 500 Tk</button></a>
+    <a style="text-decoration: none" href="{% url 'bottomwearData' 'between_500_to_1000' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/bottomwear/between_500_to_1000/' %} active {% endif %}">Between 500 To 1000 Tk</button></a>
+    <a style="text-decoration: none" href="{% url 'bottomwearData' 'between_1000_to_2000' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/bottomwear/between_1000_to_2000/' %} active {% endif %}">Between 1000 To 2000 Tk</button></a>
+    <a style="text-decoration: none" href="{% url 'bottomwearData' 'above' %}"><button type="button" class="list-group-item list-group-item-action {% if request.path == '/bottomwear/above/' %} active {% endif %}">Above 2000 + Tk</button></a>
+
+    </div>
+   </div>
+  <div class="col-sm-8 offset-sm-1">
+   <div class="row">
+       {% for b in bottomwears %}
+    <div class="col-sm-4 text-center mb-4 mx-4">
+       <div class="item">
+           <a href="{% url 'product-detail' b.id %}" class="btn">
+          <img src="{{b.product_image.url}}" alt="" height="300">
+             </a>
+         <div class="fw-bold">{{b.title}}</div>
+        <div class="fw-bold">Tk {{b.discount_price}}<small class="fw-light text-decoration-line-through"> {{b.selling_price}}</small></div>
+     </div>
+    </div>
+        {%  endfor %}
+   </div>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}
